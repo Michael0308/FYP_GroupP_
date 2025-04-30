@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Optimizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        img { margin-top: 20px; max-width: 100%; }
+    </style>
+</head>
+<body>
+
+<h1>Multi-Objective Portfolio Optimizer</h1>
+<button onclick="runOptimization()">Run Optimization</button>
+
+<div id="status"></div>
+<div id="plot">
+    <img id="plotImage" src="" alt="Optimization Plot will appear here">
+</div>
+
+<script>
+    function runOptimization() {
+        document.getElementById("status").innerText = "Running optimization, please wait...";
+        fetch("/run-optimization")
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("status").innerText = "Optimization complete. Displaying plot:";
+                    document.getElementById("plotImage").src = "/get-plot?" + new Date().getTime();
+                    document.getElementById("hv")
+                } else {
+                    document.getElementById("status").innerText = "Failed to run optimization.";
+                }
+            })
+            .catch(err => {
+                document.getElementById("status").innerText = "Error: " + err;
+            });
+    }
+</script>
+
+</body>
+</html>
