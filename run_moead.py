@@ -146,7 +146,8 @@ def calculate_spacing(solutions):
     sorted_solutions = solutions[np.argsort(solutions[:, 0])]
     distances = np.linalg.norm(np.diff(sorted_solutions, axis=0), axis=1)
     average_distance = np.mean(distances)
-    return np.mean(np.abs(distances - average_distance))
+    spacing = np.sqrt(np.mean((distances - average_distance)**2))
+    return spacing
 
 if __name__ == "__main__":
     seed = 42

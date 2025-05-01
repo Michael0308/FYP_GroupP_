@@ -50,13 +50,17 @@ def contact():
 def MOEAD():
     return render_template('moead.html')
 
-@app.route('/method3')
-def method3():
-    return render_template('method3.html')
+@app.route('/PSO')
+def PSO():
+    return render_template('PSO.html')
 
 @app.route('/SPEA')
 def SPEA():
     return render_template('SPEA.html')
+
+@app.route('/NSGA2')
+def NSGA2():
+    return render_template('NSGA2.html')
 
 @app.route('/result_SPEA')
 def result_SPEA():
@@ -67,15 +71,13 @@ def result_SPEA():
 @app.route('/run', methods=['POST'])
 def run_optimization():
     global last_pop, last_stocks
-    pop, _, _, valid_stocks = main()
+    pop, _, hof, valid_stocks = main()
     last_pop = pop
     last_stocks = valid_stocks
     fitness_values = np.array([ind.fitness.values for ind in pop])
-    # worst = np.max(fitness_values, axis=0)
-    # reference_point = worst + 0.1
-    # HVFunction = HV(ref_point=reference_point)
-    # hv = HVFunction(fitness_values)
-    hv=0.9
+    ref_point = [0.01,0.002,50]
+    ind = HV(ref_point=ref_point)
+    hv = ind(fitness_values)
     spacing = calculate_spacing(fitness_values)
     returns = [ind.fitness.values[0] for ind in pop]
     volatility = [-ind.fitness.values[1] for ind in pop]

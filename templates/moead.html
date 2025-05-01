@@ -28,7 +28,7 @@
 </head>
 <body>
     <h1>Portfolio Optimization</h1>
-    <button onclick="runOptimization()" style="font-size: 18px; padding: 10px 20px;">Run Optimization</button>
+    <button onclick="runOptimization()" style="font-size: 18px; padding: 10px 20px;">Run MOEA/D</button>
     <a href="/download_weights" style="font-size: 18px; text-decoration: none; color: blue;" target="_blank">⬇️ Download Portfolio Weights CSV</a>
     <div id="loader"></div>
     <div id="metrics" style="margin: 20px auto; font-size: 18px; text-align: center;">
@@ -107,7 +107,7 @@
                 type: 'scatter3d'
             };
             Plotly.newPlot('plot', [trace], {
-                title: '3D Pareto Front',
+                title: 'MOEA/D - 3D Pareto Front',
                 scene: { xaxis: { title: 'Expected Return' }, yaxis: { title: 'Volatility' }, zaxis: { title: 'ESG Score' } },
                 margin: { l: 0, r: 0, b: 0, t: 40 }
             });
